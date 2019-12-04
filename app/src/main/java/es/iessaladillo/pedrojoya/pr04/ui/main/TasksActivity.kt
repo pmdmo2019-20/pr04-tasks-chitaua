@@ -71,7 +71,7 @@ class TasksActivity : AppCompatActivity() {
             val task: Task = listAdapter.getItem(viewHolder.adapterPosition)
             viewModel.deleteTask(task)
             Snackbar.make(
-                txtConcept,
+                lstTasks,
                 getString(R.string.tasks_task_deleted, task.concept),
                 Snackbar.LENGTH_LONG
             )

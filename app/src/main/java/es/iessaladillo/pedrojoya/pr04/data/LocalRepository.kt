@@ -30,10 +30,14 @@ object LocalRepository : Repository {
 
 
     override fun deleteTask(taskId: Long) {
+        var position: Int = -1
         tasks.forEach {
             if (it.id == taskId) {
-                tasks.remove(it)
+                position = tasks.indexOf(it)
             }
+        }
+        if (position>-1){
+            tasks.removeAt(position)
         }
     }
 
@@ -73,17 +77,11 @@ object LocalRepository : Repository {
     }
 
     private fun giveIdToTask(): Long {
-        var id: Long = 1
-        var pos: Long = 1
-        if (tasks.isNotEmpty()) {
-            tasks.forEach {
-                if (it.id == pos) {
-                    id++
-                    pos++
-                } else {
-                    return id
-                }
-            }
+        val id: Long
+        if (tasks.isEmpty()) {
+            id = 1
+        } else {
+            id = tasks[tasks.size-1].id + 1
         }
         return id
     }
